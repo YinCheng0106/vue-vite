@@ -3,12 +3,12 @@
     {{data}}
     <input type="text" v-model='text'/>
     <p>輸出：{{text}}</p>
-</template>｀
+</template>
 
 <script setup>
 import {ref} from '@vue/reactivity'
     const data = '輸入：'
-    const text = ref('123')
+    const text = ref('')
 </script>
 
 <style scoped>

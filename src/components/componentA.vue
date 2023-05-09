@@ -1,18 +1,19 @@
 <template>
+    <h1>vue-vite 練習</h1>
     <button @click="changeView(1)">顯示單向綁定</button>
     <button @click="changeView(2)">顯示雙向綁定</button>
-    <button @click="changeView(12)">神秘按鈕</button>
     <button @click="changeView(3)">v-for</button>
+    <button @click="changeView(4)">computed</button>
+    <button @click="changeView(12)">神秘按鈕</button>
 
     <div class="container-1" v-if="view === 1">
-        <h1>vue-vite 練習</h1>
-        <p>單向綁定</p>
-        {{data}}
+    
+        <h1>單向綁定</h1>
     </div>
 
     <div class="container-2" v-if="view === 2">
-        <p>多項綁定</p>
-        <input type="text" v-model='text'>
+        <h1>多項綁定</h1>
+        {{data}} <input type="text" v-model='text'>
         <p>輸出：{{text}}</p>
     </div>
 
@@ -28,9 +29,15 @@
         </p>
     </div>
 
-    <div v-if="view !== 1 && view !== 2 && view !== 3" >
+    <div v-if="view === 4">
+        <h1>Computed 計算屬性</h1>
+
+    </div>
+
+    <div v-if="view !== 1 && view !== 2 && view !== 3 && view !== 4" >
         <h1>空</h1>
     </div>
+
 
 </template>
 
@@ -53,6 +60,7 @@ import {ref} from '@vue/reactivity'
     setTimeout(() => {
         test.value = 'apple'
     }, 2000);
+
 </script>
 
 <style scoped>
@@ -67,6 +75,10 @@ import {ref} from '@vue/reactivity'
         animation: openIn 1s ease-in-out;
     }
 
+    h1 {
+        animation: openIn 1s ease-in-out;
+    }
+    
     @keyframes openIn{
         0% {
             opacity: 0;

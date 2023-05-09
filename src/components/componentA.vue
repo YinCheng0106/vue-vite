@@ -31,7 +31,8 @@
 
     <div v-if="view === 4">
         <h1>Computed 計算屬性</h1>
-
+        <input type="number" v-model="num" />
+        <h3>{{ numFormat }}</h3>
     </div>
 
     <div v-if="view !== 1 && view !== 2 && view !== 3 && view !== 4" >
@@ -42,7 +43,8 @@
 </template>
 
 <script setup>
-import {ref} from '@vue/reactivity'
+import { computed,ref } from '@vue/reactivity';
+
     const data = '輸入：'
     const text = ref('test')
     const view = ref(1)
@@ -61,6 +63,12 @@ import {ref} from '@vue/reactivity'
         test.value = 'apple'
     }, 2000);
 
+    const num = ref(0)
+    const numFormat = computed(() => {
+        
+        if(Number.isNaN(num.value * 100)) return num
+        return `${num.value * 100}%`
+    })
 </script>
 
 <style scoped>
@@ -78,7 +86,7 @@ import {ref} from '@vue/reactivity'
     h1 {
         animation: openIn 1s ease-in-out;
     }
-    
+
     @keyframes openIn{
         0% {
             opacity: 0;

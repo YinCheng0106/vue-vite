@@ -1,8 +1,8 @@
 <template>
-    <button v-on:click="changeView(1)">顯示單向綁定</button>
-    <button v-on:click="changeView(2)">顯示雙向綁定</button>
+    <button @click="changeView(1)">顯示單向綁定</button>
+    <button @click="changeView(2)">顯示雙向綁定</button>
     <button @click="changeView(12)">神秘按鈕</button>
-
+    <button @click="changeView(3)">v-for</button>
 
     <div class="container-1" v-if="view === 1">
         <h1>vue-vite 練習</h1>
@@ -16,7 +16,14 @@
         <p>輸出：{{text}}</p>
     </div>
 
-    <div v-if="view !== 1 && view !== 2">
+    <div v-if="view === 3">
+        <h1>v-for</h1>
+        <p v-for = "(text, index) in dataList" v-bind:key="index">
+            {{index+1}}.{{ text }}
+        </p>
+    </div>
+
+    <div v-if="view !== 1 && view !== 2 && view !== 3" >
         <h1>空</h1>
     </div>
 
@@ -30,6 +37,11 @@ import {ref} from '@vue/reactivity'
     const changeView = (index) => {
         view.value = index
     }
+    const dataList = [
+        'a',
+        'b',
+        'c',
+    ]
 </script>
 
 <style scoped>

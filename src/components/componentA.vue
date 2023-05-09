@@ -38,7 +38,7 @@
 
     <div v-if="view === 5">
         <h1>watch 監聽器</h1>
-        <input type='text' v-model = 'txt'>
+        <input type='text' :style="dymanicStyle"  v-model = 'txt'>
 
     </div>
 
@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { computed,ref, watch } from 'vue';
+import { computed,reactive,ref, watch, watchEffect } from 'vue';
 
     const data = '輸入：'
     const text = ref('test')
@@ -79,10 +79,31 @@ import { computed,ref, watch } from 'vue';
 
     const txt = ref('')
 
-    watch(() => txt.value, 
-    (newData, oldData) => {
-        console.log(newData, oldData)
+    // watch(() => txt.value, 
+    //(newData, oldData) => {
+    //    console.log(newData, oldData)
+    //})
+
+    const dymanicStyle = reactive ({
+            color:'red',
+            fontSize: '14px',
+            transition: 'ease-in-out 0.2s'
+        })
+
+    watch(txt, (newData) => {
+        if(newData.length % 2 === 0) {
+            dymanicStyle.color = 'skyblue'
+            dymanicStyle.fontSize = '20px'
+        } else {
+            dymanicStyle.color = 'red'
+            dymanicStyle.fontSize = '14px'
+        }
     })
+
+    const stop = watchEffect(() => {
+        if(txt.value === 'stop') stop()
+    })
+    
 </script>
 
 <style scoped>

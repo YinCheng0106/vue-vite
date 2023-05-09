@@ -17,9 +17,14 @@
     </div>
 
     <div v-if="view === 3">
-        <h1>v-for</h1>
-        <p v-for = "(text, index) in dataList" v-bind:key="index">
-            {{index+1}}.{{ text }}
+        <p class="test-cls" 
+            :key="test"
+            >{{test}}</p>
+        <p
+            v-for = "(value, index) in dataList" 
+            :key="value"
+            >
+            <span class="hint" v-show="key !== 'key3'">{{index+1}}. {{ value }}</span>
         </p>
     </div>
 
@@ -32,16 +37,22 @@
 <script setup>
 import {ref} from '@vue/reactivity'
     const data = '輸入：'
-    const text = ref('')
+    const text = ref('test')
     const view = ref(1)
     const changeView = (index) => {
         view.value = index
     }
+
+    const test = ref('test')
     const dataList = [
         'a',
         'b',
         'c',
     ]
+
+    setTimeout(() => {
+        test.value = 'apple'
+    }, 2000);
 </script>
 
 <style scoped>
@@ -50,5 +61,20 @@ import {ref} from '@vue/reactivity'
     }
     .container-2 {
         border: 2px  skyblue solid;
+    }
+    .test-cls {
+        font-size: 40px;
+        animation: openIn 1s ease-in-out;
+    }
+
+    @keyframes openIn{
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 </style>

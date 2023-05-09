@@ -4,6 +4,7 @@
     <button @click="changeView(2)">顯示雙向綁定</button>
     <button @click="changeView(3)">v-for</button>
     <button @click="changeView(4)">computed</button>
+    <button @click="changeView(5)">watch</button>
     <button @click="changeView(12)">神秘按鈕</button>
 
     <div class="container-1" v-if="view === 1">
@@ -35,7 +36,13 @@
         <h3>{{ numFormat }}</h3>
     </div>
 
-    <div v-if="view !== 1 && view !== 2 && view !== 3 && view !== 4" >
+    <div v-if="view === 5">
+        <h1>watch 監聽器</h1>
+        <input type='text' v-model = 'txt'>
+
+    </div>
+
+    <div v-if="view !== 1 && view !== 2 && view !== 3 && view !== 4 && view !== 5" >
         <h1>空</h1>
     </div>
 
@@ -43,7 +50,7 @@
 </template>
 
 <script setup>
-import { computed,ref } from '@vue/reactivity';
+import { computed,ref, watch } from 'vue';
 
     const data = '輸入：'
     const text = ref('test')
@@ -68,6 +75,13 @@ import { computed,ref } from '@vue/reactivity';
         
         if(Number.isNaN(num.value * 100)) return num
         return `${num.value * 100}%`
+    })
+
+    const txt = ref('')
+
+    watch(() => txt.value, 
+    (newData, oldData) => {
+        console.log(newData, oldData)
     })
 </script>
 

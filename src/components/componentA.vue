@@ -1,5 +1,5 @@
 <template>
-    <h1>vue-vite 練習</h1>
+    
     <button @click="changeView(1)">顯示單向綁定</button>
     <button @click="changeView(2)">顯示雙向綁定</button>
     <button @click="changeView(3)">v-for</button>
@@ -26,7 +26,7 @@
             v-for = "(value, index) in dataList" 
             :key="value"
             >
-            <span class="hint" v-show="key !== 'key3'">{{index+1}}. {{ value }}</span>
+            <span v-show="key !== 'key3'">{{index+1}}. {{ value }}</span>
         </p>
     </div>
 

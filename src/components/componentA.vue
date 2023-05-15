@@ -5,6 +5,7 @@
     <button @click="changeView(3)">v-for</button>
     <button @click="changeView(4)">computed</button>
     <button @click="changeView(5)">watch</button>
+    <button @click="changeView(6)">父子組件</button>
     <button @click="changeView(12)">神秘按鈕</button>
 
     <div class="container-1" v-if="view === 1">
@@ -42,7 +43,14 @@
 
     </div>
 
-    <div v-if="view !== 1 && view !== 2 && view !== 3 && view !== 4 && view !== 5" >
+    <div v-if="view === 6">
+    <input type="text" v-model="msg">
+    <br>
+    字數: {{ msgConut }}
+    <Child :data="msg"></Child>
+    </div>
+
+    <div v-if="view !== 1 && view !== 2 && view !== 3 && view !== 4 && view !== 5 && view !== 6" >
         <h1>空</h1>
     </div>
 
@@ -50,6 +58,7 @@
 </template>
 
 <script setup>
+import Child from './child.vue'
 import { computed,reactive,ref, watch, watchEffect } from 'vue';
 
     const data = '輸入：'
@@ -103,7 +112,12 @@ import { computed,reactive,ref, watch, watchEffect } from 'vue';
     const stop = watchEffect(() => {
         if(txt.value === 'stop') stop()
     })
-    
+
+    const msgConut = computed(() => {
+        return msg.length;
+    })
+
+    defineProps(['data_'])
 </script>
 
 <style scoped>

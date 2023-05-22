@@ -16,7 +16,7 @@ const msgCount = computed(() => {
 })
 
 watch(msgCount, (newValue) => {
-    emit('update', newValue)
+    emit('update', `from child : ${newValue}`)
 })
 </script>
 

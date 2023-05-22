@@ -46,23 +46,21 @@
     <div v-if="view === 6">
     <input type="text" v-model="msg">
     <br>
-    字數: {{ msgConut }}
-    <Child :data="msg"></Child>
+    <Child :data_1="msg" @update="updateHandler"></Child>
     </div>
 
     <div v-if="view !== 1 && view !== 2 && view !== 3 && view !== 4 && view !== 5 && view !== 6" >
         <h1>空</h1>
     </div>
-
-
 </template>
 
 <script setup>
 import Child from './child.vue'
 import { computed,reactive,ref, watch, watchEffect } from 'vue';
 
+
     const data = '輸入：'
-    const text = ref('test')
+    const msg = ref('')
     const view = ref(1)
     const changeView = (index) => {
         view.value = index
@@ -113,11 +111,9 @@ import { computed,reactive,ref, watch, watchEffect } from 'vue';
         if(txt.value === 'stop') stop()
     })
 
-    const msgConut = computed(() => {
-        return msg.length;
-    })
-
-    defineProps(['data_'])
+    const updateHandler = (data) => {
+        console.log(data)
+    }
 </script>
 
 <style scoped>
